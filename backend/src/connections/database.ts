@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { config } from "dotenv";
+import { User } from "@/schemas";
 
 config();
 
@@ -17,8 +18,8 @@ export const AppDataSource = new DataSource({
   password: DB_PASSWORD,
   database: DB_NAME,
   
-  entities: [], 
-  migrations: ["src/models/migrations/**/*.ts"],
+  entities: [User], 
+  migrations: ["src/migrations/**/*.ts"],
   synchronize: false,
   logging: true,
 });
