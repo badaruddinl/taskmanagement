@@ -12,7 +12,8 @@
       "*": ["node_modules/*"],
       "@/*": ["src/*"]}
     ,
-    
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, 
 
     "module": "nodenext",
     "moduleResolution": "nodenext",

@@ -1,8 +1,9 @@
 import  { FastifyInstance } from "fastify/fastify";
-import pongHandler from "../handlers/pong.handler";
-import routeHandler from "@/utils/routeHandler.util";
 
-export default async function pongRoutes(fastify:FastifyInstance) {
+import routeHandler from "@/utils/routeHandler.util";
+import pongHandler from "../pong/handlers/pong.handler";
+
+export default async function userRoutes(fastify:FastifyInstance) {
     fastify.route(routeHandler({
         method:"GET",
         url:"/",

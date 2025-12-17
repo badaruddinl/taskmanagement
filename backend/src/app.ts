@@ -3,8 +3,9 @@ import { config } from "dotenv";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import { v7 as uuidv7 } from "uuid"; 
-import { connectDatabase } from "./connection/database";
+import { connectDatabase } from "./connections/database";
 import routes from "./app/routes";
+import jwt from  "@/services/token/secret"
 
 config();
 
@@ -58,6 +59,8 @@ export const init = async (): Promise<FastifyInstance> => {
   await app.register(fastifySwagger, swaggerConfig);
 
   await app.register(fastifySwaggerUi, swaggerUiConfig);
+
+  await app.register(jwt)
 
   await app.register(routes)
 
