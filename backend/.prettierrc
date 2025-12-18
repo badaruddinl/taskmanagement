@@ -1,4 +1,7 @@
 {
   "tabWidth": 2,
-  "plugins": ["prettier-plugin-prisma"]
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "all",
+  "printWidth": 100
 }
