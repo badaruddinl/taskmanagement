@@ -1,18 +1,16 @@
-import { config } from "dotenv";
-import { init, run } from "./app";
-
-config();
-
-(async () => {
+import 'reflect-metadata'
+import { config } from 'dotenv'
+import { init, run } from './app'
+config()
+;(async () => {
   try {
-    const server = await init();
-    
-    process.env.NODE_ENV = process.env.NODE_ENV ?? "development";
+    const server = await init()
 
-    await run(server);
-    
+    process.env.NODE_ENV = process.env.NODE_ENV ?? 'development'
+
+    await run(server)
   } catch (error) {
-    console.error("Failed to start server:", error);
-    process.exit(1);
+    console.error('Failed to start server:', error)
+    process.exit(1)
   }
-})();
+})()
