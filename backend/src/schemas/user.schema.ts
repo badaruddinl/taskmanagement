@@ -4,30 +4,37 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
   Index,
-} from "typeorm";
+} from 'typeorm'
+import { Role } from './role.schema'
 
 @Entity()
-@Index("username", ["username"], { unique: true })
+@Index('username', ['username'], { unique: true })
 export class User {
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
-  @Column({ type:"varchar"})
-  username!: string;
+  @Column({ type: 'varchar', length: 50 })
+  username!: string
 
-  @Column({ type:"varchar"})
-  name!: string;
+  @Column({ type: 'varchar', length: 255 })
+  name!: string
 
-  @Column({ type:"varchar"})
-  password!: string;
+  @Column({ type: 'varchar', length: 255 })
+  password!: string
 
-  @Column({type:"boolean", default: true })
-  is_active!: boolean;
+  @ManyToOne(() => Role, { eager: true })
+  @JoinColumn({ name: 'role_id' })
+  role!: Role
+
+  @Column({ type: 'boolean', default: true })
+  is_active!: boolean
 
   @CreateDateColumn()
-  created_at!: Date;
+  created_at!: Date
 
   @UpdateDateColumn()
-  updated_at!: Date;
+  updated_at!: Date
 }
