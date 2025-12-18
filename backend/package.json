@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
+    "dev": "tsx watch src/index.ts --poll",
     "build": "tsc -p tsconfig.json",
-    "dev": "nodemon --exec tsx src/index.ts",
+    "start": "tsx dist/index.js",
     "migration:generate": "tsx src/utils/migrationGenerate.util.ts",
     "migration:run": "npx tsx node_modules/typeorm/cli.js migration:run -d src/connections/database.ts",
     "migration:revert": "npx tsx node_modules/typeorm/cli.js migration:revert -d src/connections/database.ts"
@@ -27,8 +28,7 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/uuid": "^10.0.0",
-    "nodemon": "^3.1.4",
-    "tsx": "^4.16.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.5.3"
   }
 }

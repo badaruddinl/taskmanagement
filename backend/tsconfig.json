@@ -15,9 +15,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true, 
 
-    "module": "nodenext",
+    "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "target": "esnext",
+    "target": "ES2022",
     "types": [],
 
     "sourceMap": true,
