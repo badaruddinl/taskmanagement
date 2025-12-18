@@ -1,0 +1,12 @@
+{
+  "name": "taskmanagement",
+  "private": true,
+  "scripts": {
+    "dev": "docker compose up --build",
+    "dev:backend": "docker compose up --build backend",
+    "dev:frontend": "docker compose up --build frontend",
+    "down": "docker compose down",
+    "logs": "docker compose logs -f",
+    "ps": "docker compose ps"
+  }
+}
