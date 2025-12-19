@@ -16,7 +16,8 @@ export async function authGuard(request: FastifyRequest, reply: FastifyReply) {
       )
     }
     const token = auth.split(' ')[1]
-    await verifyJwt(token!)
+    const data = await verifyJwt(token!)
+    request.user = data.decoded!
   } catch (error: any) {
     if (error.code === 'FAST_JWT_EXPIRED') {
       return Interceptor(reply, StatusCodes.UNAUTHORIZED, false, 'Token expired')
