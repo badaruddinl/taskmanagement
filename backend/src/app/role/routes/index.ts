@@ -7,7 +7,7 @@ export default async function roleRoutes(fastify: FastifyInstance) {
   fastify.route(
     routeHelper({
       method: 'POST',
-      url: '/',
+      url: '/create',
       schema: createRoleSchema,
       handler: createRoleController,
     }),
