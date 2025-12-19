@@ -10,15 +10,15 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"],
-      "@/*": ["src/*"]}
-    ,
+      "@/*": ["src/*"]
+    },
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true, 
+    "emitDecoratorMetadata": true,
 
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "target": "ES2022",
-    "types": [],
+    "types": ["node", "reflect-metadata", "jsonwebtoken"],
 
     "sourceMap": true,
     "declaration": true,
@@ -31,14 +31,8 @@
     "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force", 
+    "moduleDetection": "force"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
-
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
