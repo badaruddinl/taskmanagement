@@ -2,7 +2,6 @@ import { LoginPayload, RegisterPayload } from '../dto/auth'
 import { AuthRepository } from '../repositories/auth'
 import { hashData, verifyData } from '@/utils/hashData.util'
 import { RoleRepository } from '@/app/role/repositories/role'
-import { FastifyInstance } from 'fastify/fastify'
 import { signAccessToken } from '@/services/token/sign'
 import { UnauthorizedError } from '@/errorDecorator/unauthorizedError'
 
@@ -10,7 +9,7 @@ export class AuthService {
   private readonly authRepository: AuthRepository
   private readonly roleRepository: RoleRepository
 
-  constructor(private readonly app: FastifyInstance) {
+  constructor() {
     this.authRepository = new AuthRepository()
     this.roleRepository = new RoleRepository()
   }
@@ -29,7 +28,7 @@ export class AuthService {
     }
 
     const accessToken = await signAccessToken({
-      sub: existingUser.id,
+      id: existingUser.id,
       username: existingUser.username,
       role: existingUser.role.id,
     })

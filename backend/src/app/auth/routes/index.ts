@@ -7,7 +7,7 @@ export default async function authRoutes(fastify: FastifyInstance) {
   fastify.route(
     routeHelper({
       method: 'POST',
-      url: '/',
+      url: '/login',
       schema: loginSchema,
       handler: loginController,
       auth: false,

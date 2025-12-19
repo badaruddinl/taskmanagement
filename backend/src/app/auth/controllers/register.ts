@@ -4,8 +4,9 @@ import { RegisterPayload } from '../dto/auth'
 import Interceptor from '@/utils/responseInterceptor.util'
 import { StatusCodes } from 'http-status-codes'
 
+const authService = new AuthService()
+
 export default async function registerController(request: FastifyRequest, reply: FastifyReply) {
-  const authService = new AuthService(request.server)
   try {
     const body = request.body as RegisterPayload
     const result = await authService.register(body)

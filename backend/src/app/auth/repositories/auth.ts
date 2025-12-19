@@ -12,6 +12,7 @@ export class AuthRepository {
   async findByUsername(username: string): Promise<User | null> {
     return this.repo.findOne({
       where: { username },
+      select: { id: true, username: true, password: true, is_active: true, role: true },
     })
   }
 
