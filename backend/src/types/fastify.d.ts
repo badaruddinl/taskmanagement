@@ -8,6 +8,6 @@ interface UserPayload {
 
 declare module 'fastify' {
   interface FastifyRequest {
-    user?: UserPayload
+    user: UserPayload
   }
 }

@@ -5,11 +5,13 @@ import Interceptor from '@/utils/responseInterceptor.util'
 import { StatusCodes } from 'http-status-codes'
 import requestHelper from '@/utils/requestHelper.util'
 
-export default async function loginController(request: FastifyRequest, reply: FastifyReply) {
+export default async function loginController(
+  request: FastifyRequest<{ Body: LoginPayload }>,
+  reply: FastifyReply,
+) {
   const authService = new AuthService()
   try {
-    const body = requestHelper<LoginPayload>(request, 'body')
-    const result = await authService.login(body)
+    const result = await authService.login(request.body)
 
     return Interceptor(reply, StatusCodes.OK, true, 'login successfully', result)
   } catch (error: any) {

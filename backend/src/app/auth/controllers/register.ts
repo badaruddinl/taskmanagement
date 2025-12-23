@@ -7,11 +7,12 @@ import requestHelper from '@/utils/requestHelper.util'
 
 const authService = new AuthService()
 
-export default async function registerController(request: FastifyRequest, reply: FastifyReply) {
+export default async function registerController(
+  request: FastifyRequest<{ Body: RegisterPayload }>,
+  reply: FastifyReply,
+) {
   try {
-    const body = requestHelper<RegisterPayload>(request, 'body')
-    const result = await authService.register(body)
-
+    const result = await authService.register(request.body)
     return Interceptor(reply, StatusCodes.CREATED, true, 'register successfully', {
       id: result.id,
       username: result.username,

@@ -7,9 +7,12 @@ import requestHelper from '@/utils/requestHelper.util'
 
 const roleService = new RoleService()
 
-export default async function createRoleController(request: FastifyRequest, reply: FastifyReply) {
+export default async function createRoleController(
+  request: FastifyRequest<{ Body: CreateRolePayload }>,
+  reply: FastifyReply,
+) {
   try {
-    const body = requestHelper<CreateRolePayload>(request, 'body')
+    const { body } = request
     const result = await roleService.createRole(body)
 
     return Interceptor(reply, StatusCodes.CREATED, true, 'register successfully', {
