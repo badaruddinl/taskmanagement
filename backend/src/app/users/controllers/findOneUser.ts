@@ -10,19 +10,15 @@ export default async function findOneUserController(
   request: FastifyRequest<{ Params: FindUserByUsernamePayload }>,
   reply: FastifyReply,
 ) {
-  try {
-    const { username } = request.params
-    const { id } = request.user
+  const { username } = request.params
+  const { id } = request.user
 
-    let result
-    if (username === 'me') {
-      result = await userService.findMe({ id })
-    } else if (username) {
-      result = await userService.findUserByUsername({ username })
-    }
-
-    return Interceptor(reply, StatusCodes.OK, true, 'register successfully', result)
-  } catch (error: any) {
-    return Interceptor(reply, StatusCodes.BAD_REQUEST, false, error.message)
+  let result
+  if (username === 'me') {
+    result = await userService.findMe({ id })
+  } else if (username) {
+    result = await userService.findUserByUsername({ username })
   }
+
+  return Interceptor(reply, StatusCodes.OK, true, 'register successfully', result)
 }
