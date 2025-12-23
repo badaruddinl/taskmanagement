@@ -1,10 +1,17 @@
-export const loginSchema = {
-  body: {
-    type: 'object',
-    required: ['username', 'password'],
-    properties: {
-      username: { type: 'string' },
-      password: { type: 'string' },
+import { schemaBuilder } from '@/utils/schemaBuilder.util'
+
+export const rawLoginSchema = schemaBuilder(
+  { moduleFunction: 'Login User', moduleDescription: 'login user for access application' },
+  {
+    request: {
+      body: {
+        type: 'object',
+        required: ['username', 'password'],
+        properties: {
+          username: { type: 'string' },
+          password: { type: 'string' },
+        },
+      },
     },
   },
-}
+)

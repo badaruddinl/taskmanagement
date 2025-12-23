@@ -1,3 +1,5 @@
-import { createRoleSchema } from './createRole'
+import { schemaBuilderModule } from '@/utils/schemaBuilder.util'
+import { rawCreateRoleSchema } from './createRole'
 
-export { createRoleSchema }
+const module = 'Role'
+export const createRoleSchema = schemaBuilderModule(module, rawCreateRoleSchema)

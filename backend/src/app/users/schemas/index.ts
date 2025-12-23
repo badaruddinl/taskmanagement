@@ -1,3 +1,5 @@
-import { findOneUserSchema } from './findOneUser'
+import { schemaBuilderModule } from '@/utils/schemaBuilder.util'
+import { rawFindOneUserSchema } from './findOneUser'
 
-export { findOneUserSchema }
+const module = 'User'
+export const findOneUserSchema = schemaBuilderModule(module, rawFindOneUserSchema)
