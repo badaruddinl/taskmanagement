@@ -24,7 +24,7 @@ export const AppDataSource = new DataSource({
   entities: [User, Role],
   migrations: ['src/migrations/**/*.ts'],
   synchronize: false,
-  logging: true,
+  logging: ['error'],
 })
 
 export async function connectDatabase() {

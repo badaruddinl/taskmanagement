@@ -13,7 +13,17 @@ export const init = async (): Promise<FastifyInstance> => {
   const app = fastify({
     genReqId: (req) => (req.headers['x-request-id'] as string) || uuidv7(),
     disableRequestLogging: false,
-    logger: true,
+    logger: {
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          translateTime: 'SYS:HH:MM:ss',
+          ignore: 'pid,hostname',
+          messageFormat: '{req.method} {req.url} - {msg}',
+        },
+      },
+    },
   })
 
   await app.register(fastifySwagger, swaggerConfig)
