@@ -4,16 +4,6 @@ import { StatusCodes } from 'http-status-codes'
 
 export default async (app: FastifyInstance) => {
   app.setErrorHandler((error: any, request, reply) => {
-    // JWT expired
-    if (error.code === 'FAST_JWT_EXPIRED') {
-      return Interceptor(reply, StatusCodes.UNAUTHORIZED, false, 'Token expired')
-    }
-
-    // JWT invalid
-    if (error.code === 'FAST_JWT_INVALID') {
-      return Interceptor(reply, StatusCodes.UNAUTHORIZED, false, 'Invalid token')
-    }
-
     // Schema validation
     if (error.validation) {
       return Interceptor(
@@ -24,10 +14,6 @@ export default async (app: FastifyInstance) => {
         null,
         error.validation,
       )
-    }
-
-    if (typeof error.statusCode === 'number') {
-      return Interceptor(reply, error.statusCode, false, error.message)
     }
 
     // Business error
