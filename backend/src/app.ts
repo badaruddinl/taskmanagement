@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance } from 'fastify'
+import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { config } from 'dotenv'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
@@ -20,7 +20,26 @@ export const init = async (): Promise<FastifyInstance> => {
           colorize: true,
           translateTime: 'SYS:HH:MM:ss',
           ignore: 'pid,hostname',
-          messageFormat: '{req.method} {req.url} - {msg}',
+          messageFormat: '{req.method} {req.url} {res.statusCode} ({responseTime}ms) {msg}',
+        },
+      },
+      serializers: {
+        req(request: FastifyRequest) {
+          const body = request.body ? { ...(request.body as Record<string, any>) } : {}
+          if (body['password']) body['password'] = '********'
+          if (body['token']) body['token'] = '********'
+
+          return {
+            method: request.method,
+            url: request.url,
+            body,
+          }
+        },
+        res(reply: FastifyReply) {
+          return {
+            statusCode: reply.statusCode,
+            message: reply.message,
+          }
         },
       },
     },
@@ -31,6 +50,7 @@ export const init = async (): Promise<FastifyInstance> => {
   await app.register(fastifySwaggerUi, swaggerUiConfig)
 
   await errorHandler(app)
+
   await app.register(routes)
 
   await connectDatabase()

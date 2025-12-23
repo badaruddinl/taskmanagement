@@ -10,4 +10,11 @@ declare module 'fastify' {
   interface FastifyRequest {
     user: UserPayload
   }
+  interface FastifyReply {
+    statusCode: number
+    success: boolean
+    message: string | object
+    data?: any
+    errors?: any
+  }
 }
