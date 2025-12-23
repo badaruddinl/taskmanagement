@@ -3,12 +3,13 @@ import Interceptor from '@/utils/responseInterceptor.util'
 import { StatusCodes } from 'http-status-codes/build/cjs'
 import { RoleService } from '../services/role'
 import { CreateRolePayload } from '../dto/role'
+import requestHelper from '@/utils/requestHelper.util'
 
 const roleService = new RoleService()
 
 export default async function createRoleController(request: FastifyRequest, reply: FastifyReply) {
   try {
-    const body = request.body as CreateRolePayload
+    const body = requestHelper<CreateRolePayload>(request, 'body')
     const result = await roleService.createRole(body)
 
     return Interceptor(reply, StatusCodes.CREATED, true, 'register successfully', {

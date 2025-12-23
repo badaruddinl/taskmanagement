@@ -3,11 +3,12 @@ import { AuthService } from '../services/auth'
 import { LoginPayload } from '../dto/auth'
 import Interceptor from '@/utils/responseInterceptor.util'
 import { StatusCodes } from 'http-status-codes'
+import requestHelper from '@/utils/requestHelper.util'
 
 export default async function loginController(request: FastifyRequest, reply: FastifyReply) {
   const authService = new AuthService()
   try {
-    const body = request.body as LoginPayload
+    const body = requestHelper<LoginPayload>(request, 'body')
     const result = await authService.login(body)
 
     return Interceptor(reply, StatusCodes.OK, true, 'login successfully', result)
