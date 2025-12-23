@@ -7,6 +7,7 @@ export const rawRegisterSchema = schemaBuilder(
   },
   {
     request: {
+      security: [],
       body: {
         type: 'object',
         required: ['name', 'username', 'password'],
