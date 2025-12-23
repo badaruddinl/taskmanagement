@@ -5,6 +5,7 @@ import {
   FindUserByUsernamePayload,
   UpdateUserByIdPayload,
 } from '../dto/users'
+import { NotFoundError } from '@/errorDecorator/fastifyError'
 
 export class UserService {
   private readonly userRepository: UserRepository
@@ -18,7 +19,7 @@ export class UserService {
     const user = await this.userRepository.findUserByUsername(username!)
 
     if (!user || id === user.id) {
-      throw new Error('User Not found')
+      throw new NotFoundError('User not found')
     }
 
     return user
@@ -29,7 +30,7 @@ export class UserService {
     const user = await this.userRepository.findUserById(id)
 
     if (!user) {
-      throw new Error('User Not found')
+      throw new NotFoundError('User not found')
     }
 
     return { user }

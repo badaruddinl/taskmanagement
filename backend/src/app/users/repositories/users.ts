@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm'
 import { AppDataSource } from '@/connections/database'
 import { User } from '@/schemas'
+import { NotFoundError } from '@/errorDecorator/fastifyError'
 
 export class UserRepository {
   private readonly repo: Repository<User>
@@ -30,7 +31,7 @@ export class UserRepository {
     })
 
     if (!user) {
-      throw new Error('User not found')
+      throw new NotFoundError('User not found')
     }
 
     const updateUser = this.repo.merge(user, data)

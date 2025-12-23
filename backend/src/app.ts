@@ -20,7 +20,7 @@ export const init = async (): Promise<FastifyInstance> => {
 
   await app.register(fastifySwaggerUi, swaggerUiConfig)
 
-  await app.register(errorHandler)
+  await errorHandler(app)
   await app.register(routes)
 
   await connectDatabase()
