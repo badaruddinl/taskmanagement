@@ -1,7 +1,7 @@
 import { User } from '@/schemas'
 
 export interface FindUserByUsernamePayload {
-  username?: string
+  username: string | 'me'
 }
 
 export interface FindUserByUsernameAndIdPayload {
