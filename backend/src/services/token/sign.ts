@@ -5,7 +5,7 @@ import { secret } from './secret'
 config()
 
 export interface JwtPayloadExtended extends JwtPayload {
-  sub: string
+  id: string
   username: string
   role: string
   exp?: number
